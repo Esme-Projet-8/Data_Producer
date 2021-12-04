@@ -3,7 +3,7 @@ package org.socialmedia.actors
 import akka.actor.{Actor, ActorRef, Timers}
 import akka.pattern.ask
 import akka.util.Timeout
-import org.socialmedia.utils.DataProducer.sendToPubSub
+import org.socialmedia.utils.DataPublisher.sendToPubSub
 import org.socialmedia.actors.FriendStore.{AcceptFriendRequest, SendFriendRequest}
 import org.socialmedia.actors.UserStore.GetNumUsers
 import org.socialmedia.configuration.AppConfiguration.timersConf

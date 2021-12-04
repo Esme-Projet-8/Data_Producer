@@ -9,7 +9,7 @@ import org.socialmedia.configuration.AppConfiguration.dataGenConf
 
 import scala.concurrent.duration._
 
-object Publisher {
+object Producer {
 
   case class UserActorConfig(ref: ActorRef, name: String, timeBeforeCreate: Int)
 

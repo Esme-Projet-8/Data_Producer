@@ -12,15 +12,15 @@ import java.util.concurrent.ExecutionException
 import java.util.concurrent.TimeUnit
 
 
-object DataProducer {
+object DataPublisher {
 
   implicit val formats = DefaultFormats
 
   @throws[IOException]
   @throws[ExecutionException]
   @throws[InterruptedException]
-  def publisherExample(topicId: String, message: String): Unit = {
-    val projectId = "social-network-bi"
+  def publishToPubSub(topicId: String, message: String): Unit = {
+    val projectId = "projet-esme-plateforme-bi"
     val topicName = TopicName.of(projectId, topicId)
     var publisher: Publisher = null
 
@@ -46,25 +46,26 @@ object DataProducer {
     message match {
       case msg: User =>
         println(s"User ${msg.userId} has been created")
-        publisherExample("users", write(msg.asInstanceOf[User]))
+        publishToPubSub("user", write(msg.asInstanceOf[User]))
       case msg: FriendRequest =>
         println(s"Friend request sent of ${msg.requesterId} to ${msg.receiverId}")
-        publishToConsole(write(msg.asInstanceOf[FriendRequest]))
+        publishToPubSub("friend-request", write(msg.asInstanceOf[FriendRequest]))
       case msg: FriendRequestAccepted =>
         println(s"The FriendRequest of ${msg.requesterId} to ${msg.accepterId} has been accepted")
-        publishToConsole(write(msg.asInstanceOf[FriendRequestAccepted]))
+        publishToPubSub("friend-request-accepted", write(msg.asInstanceOf[FriendRequest]))
       case msg: PicturePost =>
         println(s"The Picture ${msg.pictureId} has been shared")
-        publishToConsole(write(msg.asInstanceOf[PicturePost]))
+        publishToPubSub("post-picture", write(msg.asInstanceOf[FriendRequest]))
       case msg: LikedPicture =>
         println(s"The Picture ${msg.pictureId} has been liked")
+        publishToPubSub("like-picture", write(msg.asInstanceOf[FriendRequest]))
         publishToConsole(write(msg.asInstanceOf[LikedPicture]))
       case msg: VideoPost =>
         println(s"The Video ${msg.videoId} has been shared")
-        publishToConsole(write(msg.asInstanceOf[VideoPost]))
+        publishToPubSub("post-video", write(msg.asInstanceOf[FriendRequest]))
       case msg: LikedVideo =>
         println(s"The Video ${msg.videoId} has been liked")
-        publishToConsole(write(msg.asInstanceOf[LikedVideo]))
+        publishToPubSub("like-video", write(msg.asInstanceOf[FriendRequest]))
     }
 
   }

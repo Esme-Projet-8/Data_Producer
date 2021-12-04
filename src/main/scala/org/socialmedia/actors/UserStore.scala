@@ -2,7 +2,7 @@ package org.socialmedia.actors
 
 import akka.actor.Actor
 import com.typesafe.scalalogging.Logger
-import org.socialmedia.utils.DataProducer.sendToPubSub
+import org.socialmedia.utils.DataPublisher.sendToPubSub
 import org.socialmedia.generators.UserGenerator
 import org.socialmedia.actors.UserStore.{AddUser, GetNumUsers}
 
