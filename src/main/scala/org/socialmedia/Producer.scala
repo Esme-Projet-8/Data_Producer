@@ -1,16 +1,15 @@
 package org.socialmedia
 
 import akka.actor.{ActorRef, ActorSystem, Props}
-import com.typesafe.scalalogging.Logger
 import org.socialmedia.actors.{ContentStore, FriendStore, UserManager, UserStore}
 import org.socialmedia.actors.UserManager.CreateUser
 import org.socialmedia.generators.DateGenerator.generateTimeBeforeCreate
 import org.socialmedia.configuration.AppConfiguration.dataGenConf
-
 import scala.concurrent.duration._
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 object Producer {
-
   case class UserActorConfig(ref: ActorRef, name: String, timeBeforeCreate: Int)
 
   val system = ActorSystem("socialmedia_data_generator")

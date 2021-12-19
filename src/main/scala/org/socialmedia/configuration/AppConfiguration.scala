@@ -7,7 +7,7 @@ object AppConfiguration {
   case class KafkaConf(kafkaBrokerUrl: String, schemaRegistryUrl: String)
 
   case class Timer(minPause: Int, maxPause: Int)
-  case class Timers(actions: Timer, friendRequestAccepted: Timer)
+  case class Timers(content: Timer, friendRequest: Timer)
   case class DataGenConf(maxUsers: Int, maxHoursOffsetSignUp: Double)
 
   private val configFile = ConfigFactory.load()
@@ -23,13 +23,13 @@ object AppConfiguration {
   )
 
   val timersConf = Timers(
-    actions = Timer(
-       configFile.getInt("dataGenerator.timers.actions.minPause"),
-      configFile.getInt("dataGenerator.timers.actions.maxPause")
+    content = Timer(
+       configFile.getInt("dataGenerator.timers.content.minPause"),
+      configFile.getInt("dataGenerator.timers.content.maxPause")
     ),
-    friendRequestAccepted = Timer(
-      configFile.getInt("dataGenerator.timers.friendRequestAccepted.minPause"),
-      configFile.getInt("dataGenerator.timers.friendRequestAccepted.maxPause")
+    friendRequest = Timer(
+      configFile.getInt("dataGenerator.timers.friendRequest.minPause"),
+      configFile.getInt("dataGenerator.timers.friendRequest.maxPause")
     )
   )
 }

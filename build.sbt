@@ -12,6 +12,7 @@ libraryDependencies ++= Seq(
   dependencies.akkaActor,
   dependencies.akkaTestKit,
   dependencies.leftweb,
+  dependencies.slf4j,
   dependencies.pubsub
 )
 
@@ -32,8 +33,8 @@ lazy val dependencies = {
     val akkaActor            = "com.typesafe.akka"          %% "akka-actor"                   % akkaVersion
     val akkaTestKit          = "com.typesafe.akka"          %% "akka-testkit"                 % akkaVersion
     val leftweb              = "net.liftweb"                %% "lift-json"                    % "2.6-M4"
-    val logging              = "com.typesafe.scala-logging" %% "scala-logging"                % "3.9.0"
     val pubsub               = "com.google.cloud"           % "google-cloud-pubsub"           % "1.114.7"
+    val slf4j                 = "org.slf4j"                  % "slf4j-api"                     % "1.7.32"
   }
 }
 

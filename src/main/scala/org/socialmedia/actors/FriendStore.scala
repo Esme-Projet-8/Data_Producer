@@ -10,14 +10,13 @@ import org.socialmedia.configuration.AppConfiguration.timersConf
 import org.socialmedia.generators.DateGenerator.generateRandomNumber
 import org.socialmedia.generators.{FriendRequestAcceptedGenerator, FriendRequestGenerator}
 import org.socialmedia.utils.RandomData.{generatePauseContentCreation, getRandomUserId}
-
 import scala.concurrent.Await
 import scala.concurrent.duration.DurationInt
 
 
 object FriendStore {
   case class SendFriendRequest(userId: Int, requestSentToIds: List[Int], userStoreRef: ActorRef)
-  case class AcceptFriendRequest(requestedId: Int, accepterId: Int)
+  case class AcceptFriendRequest(requesterId: Int, accepterId: Int)
 }
 
 class FriendStore extends Actor with Timers {
@@ -37,24 +36,23 @@ class FriendStore extends Actor with Timers {
       val newPotentialFriends = (1 to maxNumUsers).toList
         .filter(user => !requestSentToIds.contains(user))
 
-      val newFriendId = getRandomUserId(newPotentialFriends)
-
+     val newFriendId = getRandomUserId(newPotentialFriends)
       if(newFriendId != 0) {
         val friendRequest = FriendRequestGenerator(userId, newFriendId)
         sendToPubSub(friendRequest)
         sender() ! newFriendId
       }
-      sender() ! 0
+      else sender() ! 0
 
       if(willRequestBeAccepted) {
-        val pauseDuration = generatePauseContentCreation(timersConf.friendRequestAccepted.minPause,
-          timersConf.friendRequestAccepted.maxPause)
+        val pauseDuration = generatePauseContentCreation(timersConf.friendRequest.minPause,
+          timersConf.friendRequest.maxPause)
         timers.startSingleTimer("friend_request_accepted_timer",
           AcceptFriendRequest(userId, newFriendId), pauseDuration seconds)
       }
 
-    case AcceptFriendRequest(requestedId, accepterId) =>
-      val acceptedFriendRequest = FriendRequestAcceptedGenerator(requestedId, accepterId)
+    case AcceptFriendRequest(requesterId, accepterId) =>
+      val acceptedFriendRequest = FriendRequestAcceptedGenerator(requesterId, accepterId)
       sendToPubSub(acceptedFriendRequest)
   }
 }
