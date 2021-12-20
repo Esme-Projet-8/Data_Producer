@@ -65,7 +65,7 @@ class UserManager extends Actor with Timers {
 
       val friendRequestPauseDuration = generatePauseContentCreation(timersConf.friendRequest.minPause,
         timersConf.friendRequest.maxPause)
-      timers.startSingleTimer("content_creation_timer", FriendRequest, friendRequestPauseDuration seconds
+      timers.startSingleTimer("friend_request_timer", FriendRequest, friendRequestPauseDuration seconds
     )
 
   }

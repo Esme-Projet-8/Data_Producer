@@ -47,22 +47,22 @@ object DataPublisher {
         logger.info(s"User ${msg.userId} has been created")
         //publishToPubSub("user", write(msg.asInstanceOf[User]))
       case msg: FriendRequest =>
-        logger.info(s"Friend request sent of ${msg.requesterId} to ${msg.receiverId}")
+        logger.info(s"Friend request sent from User ${msg.requesterId} to ${msg.receiverId}")
         //publishToPubSub("friend-request", write(msg.asInstanceOf[FriendRequest]))
       case msg: FriendRequestAccepted =>
-        logger.info(s"The FriendRequest of ${msg.requesterId} to ${msg.accepterId} has been accepted")
+        logger.info(s"Accepted FriendRequest from User ${msg.requesterId} to ${msg.accepterId}")
         //publishToPubSub("friend-request-accepted", write(msg.asInstanceOf[FriendRequest]))
       case msg: PicturePost =>
-        logger.info(s"The Picture ${msg.pictureId} has been shared")
+        logger.info(s"The Picture ${msg.pictureId} has been shared by User ${msg.publisherId}")
         //publishToPubSub("post-picture", write(msg.asInstanceOf[FriendRequest]))
       case msg: LikedPicture =>
-        logger.info(s"The Picture ${msg.pictureId} has been liked")
+        logger.info(s"The Picture ${msg.pictureId} has been liked by User ${msg.userId}")
         //publishToPubSub("like-picture", write(msg.asInstanceOf[FriendRequest]))
       case msg: VideoPost =>
-        logger.info(s"The Video ${msg.videoId} has been shared")
+        logger.info(s"The Video ${msg.videoId} has been shared by User ${msg.publisherId}")
         //publishToPubSub("post-video", write(msg.asInstanceOf[FriendRequest]))
       case msg: LikedVideo =>
-        logger.info(s"The Video ${msg.videoId} has been liked")
+        logger.info(s"The Video ${msg.videoId} has been liked by User ${msg.userId}")
         //publishToPubSub("like-video", write(msg.asInstanceOf[FriendRequest]))
     }
 

@@ -45,8 +45,9 @@ class FriendStore extends Actor with Timers {
       else sender() ! 0
 
       if(willRequestBeAccepted) {
-        val pauseDuration = generatePauseContentCreation(timersConf.friendRequest.minPause,
-          timersConf.friendRequest.maxPause)
+      val pauseDuration = generatePauseContentCreation(timersConf.friendRequest.minPause,
+        timersConf.friendRequest.maxPause)
+      self ! AcceptFriendRequest(userId, newFriendId)
         timers.startSingleTimer("friend_request_accepted_timer",
           AcceptFriendRequest(userId, newFriendId), pauseDuration seconds)
       }
