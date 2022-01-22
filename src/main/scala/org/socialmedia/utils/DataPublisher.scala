@@ -1,29 +1,26 @@
 package org.socialmedia.utils
 
+import com.google.cloud.pubsub.v1.Publisher
+import com.google.protobuf.ByteString
+import com.google.pubsub.v1.{PubsubMessage, TopicName}
 import net.liftweb.json.DefaultFormats
 import net.liftweb.json.Serialization.write
 import org.slf4j.LoggerFactory
 import org.socialmedia.models._
-/*import com.google.cloud.pubsub.v1.Publisher
-import com.google.protobuf.ByteString
-import com.google.pubsub.v1.PubsubMessage
-import com.google.pubsub.v1.TopicName*/
 import java.io.IOException
 import java.util.concurrent.ExecutionException
 import java.util.concurrent.TimeUnit
-import com.typesafe.scalalogging.Logger
-
 
 object DataPublisher {
 
   val logger = LoggerFactory.getLogger("DataPublisher")
   implicit val formats = DefaultFormats
 
-  /*@throws[IOException]
+  @throws[IOException]
   @throws[ExecutionException]
   @throws[InterruptedException]
   def publishToPubSub(topicId: String, message: String): Unit = {
-    val projectId = "projet-esme-plateforme-bi"
+    val projectId = "social-network-bi"
     val topicName = TopicName.of(projectId, topicId)
     var publisher: Publisher = null
 
@@ -39,13 +36,13 @@ object DataPublisher {
       publisher.shutdown()
       publisher.awaitTermination(1, TimeUnit.MINUTES)
     }
-  }*/
+  }
 
   def sendToPubSub[T](message: T): Unit = {
     message match {
       case msg: User =>
         logger.info(s"User ${msg.userId} has been created")
-        //publishToPubSub("user", write(msg.asInstanceOf[User]))
+        publishToPubSub("user", write(msg.asInstanceOf[User]))
       case msg: FriendRequest =>
         logger.info(s"Friend request sent of ${msg.requesterId} to ${msg.receiverId}")
         //publishToPubSub("friend-request", write(msg.asInstanceOf[FriendRequest]))
