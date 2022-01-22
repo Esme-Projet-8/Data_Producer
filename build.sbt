@@ -28,7 +28,7 @@ lazy val dependencies = {
 
     val typesafeConfig       = "com.typesafe"               % "config"                        % "1.4.0"
     val scalaFaker           = "com.github.stevenchen3"     %% "scala-faker"                  % "0.1.1"
-    val scalaTest            = "org.scalatest"              %% "scalatest"                    % "3.2.2" % "test"
+    val scalaTest            = "org.scalatest"              %% "scalatest"                    % "3.2.2" % Test
     val fabricator           = "com.github.azakordonets"    % "fabricator_2.10"               % "1.0.4"
     val akkaActor            = "com.typesafe.akka"          %% "akka-actor"                   % akkaVersion
     val akkaTestKit          = "com.typesafe.akka"          %% "akka-testkit"                 % akkaVersion

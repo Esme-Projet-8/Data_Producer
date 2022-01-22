@@ -18,8 +18,6 @@ object ContentStore {
 class ContentStore extends Actor {
   var latestPictureIndex = 0
   var latestVideoIndex = 0
-  var latestLikePictureIndex = 0
-  var latestLikeVideoIndex = 0
 
   override def receive: Receive = {
     case AddPicture(user) =>
@@ -33,15 +31,19 @@ class ContentStore extends Actor {
       sendToPubSub(video)
 
     case LikePicture(user) =>
-      latestLikePictureIndex = latestLikePictureIndex + 1
-      val randomPicIndex = generateRandomNumber(1, latestPictureIndex)
-      val likedPicture = LikedPictureGenerator(user.userId, randomPicIndex)
-      sendToPubSub(likedPicture)
+      if (latestVideoIndex > 0) {
+        //println(s"Pick a picture ID between 1 and $latestPictureIndex")
+        val randomPicIndex = generateRandomNumber(1, latestPictureIndex)
+        val likedPicture = LikedPictureGenerator(user.userId, randomPicIndex)
+        sendToPubSub(likedPicture)
+      }
 
     case LikeVideo(user) =>
-      latestLikeVideoIndex = latestLikeVideoIndex + 1
-      val randomVideoIndex = generateRandomNumber(1, latestLikeVideoIndex)
-      val likedVideo = LikedVideoGenerator(user.userId, randomVideoIndex)
-      sendToPubSub(likedVideo)
+      if (latestVideoIndex > 0) {
+        //println(s"Pick a video ID between 1 and $latestVideoIndex")
+        val randomVideoIndex = generateRandomNumber(1, latestVideoIndex)
+        val likedVideo = LikedVideoGenerator(user.userId, randomVideoIndex)
+        sendToPubSub(likedVideo)
+      }
   }
 }
