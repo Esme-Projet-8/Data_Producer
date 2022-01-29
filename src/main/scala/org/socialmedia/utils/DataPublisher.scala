@@ -20,7 +20,7 @@ object DataPublisher {
   @throws[ExecutionException]
   @throws[InterruptedException]
   def publishToPubSub(topicId: String, message: String): Unit = {
-    val projectId = "social-network-bi"
+    val projectId = "projet-esme-plateforme-bi"
     val topicName = TopicName.of(projectId, topicId)
     var publisher: Publisher = null
 
@@ -45,22 +45,22 @@ object DataPublisher {
         publishToPubSub("user", write(msg.asInstanceOf[User]))
       case msg: FriendRequest =>
         logger.info(s"Friend request sent from User ${msg.requesterId} to ${msg.receiverId}")
-        //publishToPubSub("friend-request", write(msg.asInstanceOf[FriendRequest]))
+        publishToPubSub("friend-request", write(msg.asInstanceOf[FriendRequest]))
       case msg: FriendRequestAccepted =>
         logger.info(s"Accepted FriendRequest from User ${msg.requesterId} to ${msg.accepterId}")
-        //publishToPubSub("friend-request-accepted", write(msg.asInstanceOf[FriendRequest]))
+        publishToPubSub("friend-request-accepted", write(msg.asInstanceOf[FriendRequestAccepted]))
       case msg: PicturePost =>
         logger.info(s"The Picture ${msg.pictureId} has been shared by User ${msg.publisherId}")
-        //publishToPubSub("post-picture", write(msg.asInstanceOf[FriendRequest]))
+        publishToPubSub("post-picture", write(msg.asInstanceOf[PicturePost]))
       case msg: LikedPicture =>
         logger.info(s"The Picture ${msg.pictureId} has been liked by User ${msg.userId}")
-        //publishToPubSub("like-picture", write(msg.asInstanceOf[FriendRequest]))
+        publishToPubSub("like-picture", write(msg.asInstanceOf[LikedPicture]))
       case msg: VideoPost =>
         logger.info(s"The Video ${msg.videoId} has been shared by User ${msg.publisherId}")
-        //publishToPubSub("post-video", write(msg.asInstanceOf[FriendRequest]))
+        publishToPubSub("post-video", write(msg.asInstanceOf[VideoPost]))
       case msg: LikedVideo =>
         logger.info(s"The Video ${msg.videoId} has been liked by User ${msg.userId}")
-        //publishToPubSub("like-video", write(msg.asInstanceOf[FriendRequest]))
+        publishToPubSub("like-video", write(msg.asInstanceOf[LikedVideo]))
     }
 
   }

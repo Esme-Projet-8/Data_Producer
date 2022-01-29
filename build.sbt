@@ -2,7 +2,7 @@ name := "producer"
 
 version := "0.1"
 
-scalaVersion := "2.11.8"
+scalaVersion := "2.11.12"
 
 libraryDependencies ++= Seq(
   dependencies.typesafeConfig,
@@ -38,4 +38,12 @@ lazy val dependencies = {
   }
 }
 
+mainClass := Some("org.socialmedia.Producer")
+//assemblyOption in assembly := (assemblyOption in assembly).value.copy(includeScala = true, includeDependency = true)
 
+//assemblyMergeStrategy in assembly := {
+  //case PathList("joda-convert-2.2.0.jar", xs @ _*) => MergeStrategy.last
+  //case PathList("gson-2.8.8.jar", xs @ _*) => MergeStrategy.last
+  //case PathList("META-INF", "MANIFEST.MF") => MergeStrategy.discard
+  //case _ => MergeStrategy.first
+//}
