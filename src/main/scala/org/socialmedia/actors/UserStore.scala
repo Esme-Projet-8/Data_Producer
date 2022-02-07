@@ -1,6 +1,6 @@
 package org.socialmedia.actors
 
-import akka.actor.Actor
+import akka.actor.{Actor, ActorLogging}
 import com.typesafe.scalalogging.Logger
 import org.socialmedia.utils.DataPublisher.sendToPubSub
 import org.socialmedia.generators.UserGenerator

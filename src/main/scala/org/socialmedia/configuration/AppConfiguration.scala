@@ -4,18 +4,11 @@ import com.typesafe.config.ConfigFactory
 
 object AppConfiguration {
 
-  case class KafkaConf(kafkaBrokerUrl: String, schemaRegistryUrl: String)
-
   case class Timer(minPause: Int, maxPause: Int)
   case class Timers(content: Timer, friendRequest: Timer)
   case class DataGenConf(maxUsers: Int, maxHoursOffsetSignUp: Double)
 
   private val configFile = ConfigFactory.load()
-
-  val kafkaConf = KafkaConf(
-    kafkaBrokerUrl = configFile.getString("kafka.kafkaBrokerUrl"),
-    schemaRegistryUrl = configFile.getString("kafka.schemaRegistryUrl")
-  )
 
   val dataGenConf = DataGenConf(
     maxUsers = configFile.getInt("dataGenerator.maxUsers"),

@@ -1,6 +1,6 @@
 package org.socialmedia.actors
 
-import akka.actor.{Actor, ActorRef, Timers}
+import akka.actor.{Actor, ActorLogging, ActorRef, Timers}
 import akka.pattern.ask
 import akka.util.Timeout
 import org.socialmedia.utils.DataPublisher.sendToPubSub
@@ -10,6 +10,7 @@ import org.socialmedia.configuration.AppConfiguration.timersConf
 import org.socialmedia.generators.DateGenerator.generateRandomNumber
 import org.socialmedia.generators.{FriendRequestAcceptedGenerator, FriendRequestGenerator}
 import org.socialmedia.utils.RandomData.{generatePauseContentCreation, getRandomUserId}
+
 import scala.concurrent.Await
 import scala.concurrent.duration.DurationInt
 

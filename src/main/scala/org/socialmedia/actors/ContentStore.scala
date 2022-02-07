@@ -1,11 +1,11 @@
 package org.socialmedia.actors
 
-import akka.actor.Actor
-import org.socialmedia.utils.DataPublisher.{sendToPubSub}
+import akka.actor.{Actor, ActorLogging}
+import org.socialmedia.utils.DataPublisher.sendToPubSub
 import org.socialmedia.actors.ContentStore.{AddPicture, AddVideo, LikePicture, LikeVideo}
 import org.socialmedia.generators.DateGenerator.generateRandomNumber
 import org.socialmedia.generators.{LikedPictureGenerator, LikedVideoGenerator, PictureGenerator, VideoGenerator}
-import org.socialmedia.models.{User}
+import org.socialmedia.models.User
 
 
 object ContentStore {
